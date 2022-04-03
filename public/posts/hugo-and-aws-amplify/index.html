@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Host a Hugo webpage on Github | Marcus Flodihn</title>
+<meta name="keywords" content="hugo, git, tutorial, static web site, hosting" />
+<meta name="description" content="This site is made with Hugo, which is a static site generator. The site is hosted on Github pages which is free while staying under some user limits.
+Getting started with Hugo Hugo has a great getting started tutorial at their website. Once you have installed Hugo you can bootstrap a project with the following command:
+hugo new site &lt;name-of-your-project&gt; Then you can add some content to your website with:">
+<meta name="author" content="">
+<link rel="canonical" href="https://marcusflodihn.com/posts/hugo-and-aws-amplify/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.48a18943c2fc15c38a372b8dde1f5e5dc0bc64fa6cb90f5a817d2f8c76b7f3ae.css" integrity="sha256-SKGJQ8L8FcOKNyuN3h9eXcC8ZPpsuQ9agX0vjHa3864=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://marcusflodihn.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://marcusflodihn.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://marcusflodihn.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://marcusflodihn.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://marcusflodihn.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Host a Hugo webpage on Github" />
+<meta property="og:description" content="This site is made with Hugo, which is a static site generator. The site is hosted on Github pages which is free while staying under some user limits.
+Getting started with Hugo Hugo has a great getting started tutorial at their website. Once you have installed Hugo you can bootstrap a project with the following command:
+hugo new site &lt;name-of-your-project&gt; Then you can add some content to your website with:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://marcusflodihn.com/posts/hugo-and-aws-amplify/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-28T20:10:16&#43;02:00" />
+<meta property="article:modified_time" content="2022-03-28T20:10:16&#43;02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Host a Hugo webpage on Github"/>
+<meta name="twitter:description" content="This site is made with Hugo, which is a static site generator. The site is hosted on Github pages which is free while staying under some user limits.
+Getting started with Hugo Hugo has a great getting started tutorial at their website. Once you have installed Hugo you can bootstrap a project with the following command:
+hugo new site &lt;name-of-your-project&gt; Then you can add some content to your website with:"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://marcusflodihn.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Host a Hugo webpage on Github",
+      "item": "https://marcusflodihn.com/posts/hugo-and-aws-amplify/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Host a Hugo webpage on Github",
+  "name": "Host a Hugo webpage on Github",
+  "description": "This site is made with Hugo, which is a static site generator. The site is hosted on Github pages which is free while staying under some user limits.\nGetting started with Hugo Hugo has a great getting started tutorial at their website. Once you have installed Hugo you can bootstrap a project with the following command:\nhugo new site \u0026lt;name-of-your-project\u0026gt; Then you can add some content to your website with:",
+  "keywords": [
+    "hugo", "git", "tutorial", "static web site", "hosting"
+  ],
+  "articleBody": "This site is made with Hugo, which is a static site generator. The site is hosted on Github pages which is free while staying under some user limits.\nGetting started with Hugo Hugo has a great getting started tutorial at their website. Once you have installed Hugo you can bootstrap a project with the following command:\nhugo new site  Then you can add some content to your website with:\nhugo new posts/hello-world.md If you add some content to the created markdown file, like so:\n--- title: \"Hello World!\" date: 2022-03-28T20:10:16+02:00 draft: true --- This is my first content! You can start a server locally that hosts the webpage at localhost:1313 and you can preview your content! 🎉\nSetting up the repository Let’s push this to Github, create a public repository for our code at https://github.com.\nThen go to the repository settings and head to the “Pages” options, specify which branch that Github should host, and the root for the website.\nI chose “master” for the branch and “/” for the website root.\nIf you have your own domain, you can also add it to the “Custom domain” setting. HTTPS might as well be enforced.\nThen we can push our content to it:\ngit init git add . git commit -m \"initial commit\" git remote add origin git@github.com:/.git git push -u origin master ",
+  "wordCount" : "223",
+  "inLanguage": "en",
+  "datePublished": "2022-03-28T20:10:16+02:00",
+  "dateModified": "2022-03-28T20:10:16+02:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://marcusflodihn.com/posts/hugo-and-aws-amplify/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marcus Flodihn",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://marcusflodihn.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://marcusflodihn.com" accesskey="h" title="Marcus Flodihn (Alt + H)">Marcus Flodihn</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Host a Hugo webpage on Github
+    </h1>
+    <div class="post-meta"><span title='2022-03-28 20:10:16 +0200 CEST'>March 28, 2022</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>This site is made with <a href="https://gohugo.io/">Hugo</a>, which is a static site generator. The site is hosted on Github pages which is free while staying under some user <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#usage-limits">limits</a>.</p>
+<h2 id="getting-started-with-hugo">Getting started with Hugo<a hidden class="anchor" aria-hidden="true" href="#getting-started-with-hugo">#</a></h2>
+<p>Hugo has a great getting started <a href="https://gohugo.io/getting-started/quick-start/">tutorial</a> at their website. Once you have installed Hugo you can bootstrap a project with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hugo new site &lt;name-of-your-project&gt;
+</code></pre></div><p>Then you can add some content to your website with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hugo new posts/hello-world.md
+</code></pre></div><p>If you add some content to the created markdown file, like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">---
+title: &#34;Hello World!&#34;
+date: 2022-03-28T20:10:16+02:00
+draft: true
+---
+This is my first content!
+</code></pre></div><p>You can start a server locally that hosts the webpage at <a href="localhost:1313">localhost:1313</a> and you can preview your content! 🎉</p>
+<h2 id="setting-up-the-repository">Setting up the repository<a hidden class="anchor" aria-hidden="true" href="#setting-up-the-repository">#</a></h2>
+<p>Let&rsquo;s push this to Github, create a public repository for our code at <a href="https://github.com">https://github.com</a>.</p>
+<p>Then go to the repository settings and head to the &ldquo;Pages&rdquo; options, specify which branch that Github should host, and the root for the website.</p>
+<p>I chose &ldquo;master&rdquo; for the branch and &ldquo;/&rdquo; for the website root.</p>
+<p>If you have your own domain, you can also add it to the &ldquo;Custom domain&rdquo; setting. HTTPS might as well be enforced.</p>
+<p>Then we can push our content to it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git init
+git add .
+git commit -m <span style="color:#e6db74">&#34;initial commit&#34;</span>
+git remote add origin git@github.com:&lt;your-username&gt;/&lt;your-repo-name&gt;.git
+git push -u origin master
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://marcusflodihn.com/tags/hugo/">hugo</a></li>
+      <li><a href="https://marcusflodihn.com/tags/git/">git</a></li>
+      <li><a href="https://marcusflodihn.com/tags/tutorial/">tutorial</a></li>
+      <li><a href="https://marcusflodihn.com/tags/static-web-site/">static web site</a></li>
+      <li><a href="https://marcusflodihn.com/tags/hosting/">hosting</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://marcusflodihn.com">Marcus Flodihn</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

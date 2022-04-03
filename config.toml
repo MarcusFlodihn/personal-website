@@ -1,7 +1,10 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://marcusflodihn.github.io/personal-website/'
 languageCode = 'en-us'
 title = 'Marcus Flodihn'
 theme = 'PaperMod'
+
+[taxonomies]
+tag = 'tags'
 
 [[deployment.targets]]
 name = "mydeployment"
