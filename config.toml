@@ -2,6 +2,7 @@ baseURL = 'https://marcusflodihn.github.io/personal-website/'
 languageCode = 'en-us'
 title = 'Marcus Flodihn'
 theme = 'PaperMod'
+publishDir = "."
 
 [taxonomies]
 tag = 'tags'
