@@ -20,6 +20,16 @@ Hugo has a great getting started [tutorial](https://gohugo.io/getting-started/qu
 ```shell
 hugo new site <name-of-your-project>
 ```
+
+You need to provide Hugo with some configuration, create a file called `config.toml` in your project root directory and put the following content in:
+
+```toml
+baseURL = 'https://<your-git-username>.github.io/<git-repo-name>/'
+languageCode = 'en-us'
+title = Your site title
+publishDir = "."
+```
+
 Then you can add some content to your website with:
 
 ```shell
@@ -78,18 +88,14 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: "."
 ```
 
 ## Setting up the repository
 
 Let's push this to Github, create a public repository for our code at [https://github.com](https://github.com).
 
-Then go to the repository settings and head to the "Pages" options, specify which branch that Github should host, and the root for the website.
-
-I chose "master" for the branch and "/" for the website root.
-
-If you have your own domain, you can also add it to the "Custom domain" setting. HTTPS might as well be enforced.
+Then go to the repository settings and head to the "Pages" options, specify which branch that Github should host, and the root for the website. Pick "/" for the website root. As for the branch pick your prefered branch name. 
 
 Then we can push our content to it:
 
@@ -101,3 +107,10 @@ git remote add origin git@github.com:<your-username>/<your-repo-name>.git
 git push -u origin master
 ```
 
+Head over to your repository and you should see the build and deployment actions being triggered. Once they finish you can visit the hosted website at:
+
+`https://<your-username>.github.io/<repo-name>/posts/<hello-world>/`
+
+## Add custom domain
+
+wip
