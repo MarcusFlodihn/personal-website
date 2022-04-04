@@ -1,8 +1,9 @@
-baseURL = 'https://marcusflodihn.github.io/personal-website/'
+baseURL = 'https://marcusflodihn.com'
 languageCode = 'en-us'
 title = 'Marcus Flodihn'
 theme = 'PaperMod'
 publishDir = "."
+enableEmoji = true
 
 [taxonomies]
 tag = 'tags'
