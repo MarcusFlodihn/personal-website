@@ -1,7 +1,7 @@
 ---
 title: "Host a Hugo webpage on Github"
 date: 2022-03-28T20:10:16+02:00
-draft: false
+draft: true
 tags:
     - hugo
     - git
@@ -47,12 +47,12 @@ This is my first content!
 ```
 You can start a server locally that hosts the webpage at [localhost:1313](localhost:1313) and you can preview your content! 🎉
 
-## Building site on pushes
+## Building site with Github actions
 
 In order to have the website built when a push is made, we need to create a Github workflow. Create a yaml-file in the `.github/workflows/` like so:
 
 ```sh
-mkdir .github/workflows && touch .github/workflows/build.yaml
+mkdir -p .github/workflows && touch .github/workflows/build.yaml
 ```
 
 Put the following content into the file:
